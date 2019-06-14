@@ -26,15 +26,20 @@
       </div>
     </div>
 
-  <ul>
-    <div class="row">
-    <% @product.reviews.each do |r| %>
-      Review: <%= r.description %>
+  <div>
+    <%= form_for [@product, @review], url: `/products/#{@product.id}/reviews` do |f| %>
+      <div class="form-review">Rating: <%= f.select :rating, %w{ 1 2 3 4 5 } %> </div>
+      <div class="form-review">Write a Review:</br> <%= f.text_area :description %></div>
+      <div class="form-review"><%= f.submit "Post Review", class: 'btn btn-md btn-primary' %></div>
+      <% end %>
       </br>
+
+  <% @product.reviews.each do |r| %>
+    <div>
+      Review: <%= r.description %>
       Rating: <%= r.rating %>/5
       <% end %>
     </div> 
-  </ul>
   </article>
 
 </section>
