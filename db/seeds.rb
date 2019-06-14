@@ -133,4 +133,17 @@ cat3.products.create!({
 })
 
 
+## USER ##
+User.destroy_all
+test_user = User.create! firstname: "Dan", lastname: "Zajac", email: "dan.zajac@mac.com", password: "ddd"
+
+
+## REVIEW ##
+prod1 = Product.find_by! id: 1
+user1 = User.find_by! email: "dan.zajac@mac.com"
+
+Review.destroy_all
+prod1.reviews.create({description: "Wow fantastic", rating: 3, user_id: user1.id})
+
+
 puts "DONE!"
